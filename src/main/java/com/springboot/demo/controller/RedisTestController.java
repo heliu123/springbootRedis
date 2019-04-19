@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * @ClassName: RedisTestController
@@ -63,8 +62,8 @@ public class RedisTestController extends BaseController{
             user.setName("隔壁老王");
             user.setAge(28);
             user.setId(getUuid());
-            redisUtil.set("user",user, RedisConstants.datebase1);
-            User res = (User)redisUtil.get("user",RedisConstants.datebase1);
+            redisUtil.set("user"+user.getId(),user, RedisConstants.datebase1);
+            User res = (User)redisUtil.get("user"+user.getId(),RedisConstants.datebase1);
             logger.info("res="+res.toString());
             logger.info("读取redis成功");
             return getModelMap(StateParameter.SUCCESS, res, "操作成功");
